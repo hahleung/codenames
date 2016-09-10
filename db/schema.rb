@@ -29,9 +29,9 @@ ActiveRecord::Schema.define(version: 20160910132337) do
   end
 
   create_table "words", force: :cascade do |t|
-    t.string   "data",       default: [],              array: true
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
