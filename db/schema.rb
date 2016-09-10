@@ -29,14 +29,14 @@ ActiveRecord::Schema.define(version: 20160910142651) do
   end
 
   create_table "keys", force: :cascade do |t|
+    t.integer  "tiles",                   array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "tiles", force: :cascade do |t|
-    t.string   "color"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string  "color"
+    t.integer "position", array: true
   end
 
   create_table "words", force: :cascade do |t|
