@@ -7,6 +7,7 @@ namespace :words do
     words = File.readlines(file_path).map(&:chomp)
 
     words.map do |word|
+      puts "Adding #{word} to the database"
       Word.create(name: word)
     end
   end

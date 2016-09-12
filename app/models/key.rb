@@ -17,12 +17,23 @@ class Key < ApplicationRecord
     (1..5).to_a.repeated_permutation(2).to_a.shuffle
   end
 
+  def self.sample_words
+    Word.all.pluck(:name).sample(25)
+  end
+
   def self.generate
     color_set = create_color_set
     positions = create_positions
+    words = sample_words
 
-    tiles = positions.zip(color_set).map do |position, color|
-      Tile.create color: color, position: position
+    composition = words.zip(color_set, positions)
+
+    tiles = composition.map do |word, color, position|
+      Tile.create(
+        name: word,
+        color: color,
+        position: position
+      )
     end.pluck(:id)
 
     Key.create tiles: tiles
