@@ -14,7 +14,7 @@ class Key < ApplicationRecord
   end
 
   def self.create_positions
-    (1..5).to_a.repeated_permutation(2).to_a.shuffle
+    (1..5).to_a.repeated_permutation(2).to_a
   end
 
   def self.sample_words
@@ -23,7 +23,7 @@ class Key < ApplicationRecord
 
   def self.generate
     color_set = create_color_set
-    positions = create_positions
+    positions = create_positions.shuffle
     words = sample_words
 
     composition = words.zip(color_set, positions)
@@ -37,5 +37,23 @@ class Key < ApplicationRecord
     end.pluck(:id)
 
     Key.create tiles: tiles
+  end
+
+  def show_colors
+    tiles_set = tiles.map { |id| Tile.find(id) }.map do |tile|
+      {
+        "position": tile.position,
+        "name": tile.name,
+        "color": tile.color
+      }
+    end
+
+    positions = Key.create_positions
+
+    key = positions.map do |position|
+      tiles_set.select do |tile|
+        tile[:position] == position
+      end.first
+    end.each_slice(5).to_a
   end
 end
