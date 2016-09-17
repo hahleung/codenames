@@ -10,20 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160912205134) do
+ActiveRecord::Schema.define(version: 20160917110455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "boards", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "keys", force: :cascade do |t|
     t.integer  "tiles",                   array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "public_id",  null: false
   end
 
   create_table "tiles", force: :cascade do |t|

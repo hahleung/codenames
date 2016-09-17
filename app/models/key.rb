@@ -36,7 +36,7 @@ class Key < ApplicationRecord
       )
     end.pluck(:id)
 
-    Key.create tiles: tiles
+    Key.create tiles: tiles, public_id: rand(999999)
   end
 
   def show_colors
