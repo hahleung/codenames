@@ -11,12 +11,13 @@ module Codenames
     end
 
     def show
-      key = Key.find(id).show_colors
+      key = Key.find(id).render_key
+      key_params = Key.find(id).render_params
 
       key_view = if tag == 'key'
-                   Views::Key.display_spy(key)
+                   Views::Key.display_spy(key, key_params)
                  else
-                   Views::Key.display_board(key)
+                   Views::Key.display_board(key, key_params)
                  end
 
       render html: key_view.html_safe, content_type: 'text/html', status: 200

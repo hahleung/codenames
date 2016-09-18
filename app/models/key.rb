@@ -39,7 +39,7 @@ class Key < ApplicationRecord
     Key.create tiles: tiles, public_id: rand(999999)
   end
 
-  def show_colors
+  def render_key
     tiles_set = tiles.map { |id| Tile.find(id) }.map do |tile|
       {
         "position": tile.position,
@@ -50,10 +50,16 @@ class Key < ApplicationRecord
 
     positions = Key.create_positions
 
-    key = positions.map do |position|
+    positions.map do |position|
       tiles_set.select do |tile|
         tile[:position] == position
       end.first
     end.each_slice(5).to_a
+  end
+
+  def render_params
+    {
+      public_id: public_id
+    }
   end
 end

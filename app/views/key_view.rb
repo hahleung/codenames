@@ -5,7 +5,7 @@ require_relative './common/key_helper.rb'
 module Codenames
   module Views
     class Key
-      def self.display_spy(key)
+      def self.display_spy(key, key_params)
         Nokogiri::HTML::Builder.new do |doc|
           doc.html do
             doc.head do
@@ -14,6 +14,9 @@ module Codenames
 
             doc.body Settings.body_attributes do
               Navbar.display(doc)
+
+              KeyHelper.display_public_id(doc, key_params[:public_id])
+
               KeyHelper.display_key(doc, key)
 
               Settings.set_body_script(doc)
@@ -22,7 +25,7 @@ module Codenames
         end.to_html
       end
 
-      def self.display_board(key)
+      def self.display_board(key, key_params)
         Nokogiri::HTML::Builder.new do |doc|
           doc.html do
             doc.head do
@@ -31,6 +34,9 @@ module Codenames
 
             doc.body Settings.body_attributes do
               Navbar.display(doc)
+
+              KeyHelper.display_public_id(doc, key_params[:public_id])
+
               KeyHelper.display_board(doc, key)
 
               Settings.set_body_script(doc)
