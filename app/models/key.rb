@@ -1,6 +1,7 @@
 class Key < ApplicationRecord
   def self.create_color_set
     beginning_team = [:red, :blue].sample
+
     colors = {
       :red => (beginning_team == :red ? 9 : 8),
       :blue => (beginning_team == :blue ? 9 : 8),
@@ -8,9 +9,11 @@ class Key < ApplicationRecord
       :white => 7
     }
 
-    colors.values.zip(colors.keys).flat_map do |num, color|
+    set = colors.values.zip(colors.keys).flat_map do |num, color|
       Array.new(num, color)
     end.shuffle
+
+    [beginning_team, set]
   end
 
   def self.create_positions
@@ -22,7 +25,7 @@ class Key < ApplicationRecord
   end
 
   def self.generate
-    color_set = create_color_set
+    first_team, color_set = create_color_set
     positions = create_positions.shuffle
     words = sample_words
 
@@ -36,7 +39,11 @@ class Key < ApplicationRecord
       )
     end.pluck(:id)
 
-    Key.create tiles: tiles, public_id: rand(999999)
+    Key.create(
+      tiles: tiles,
+      public_id: rand(999999),
+      first_team: first_team
+    )
   end
 
   def render_key
@@ -59,7 +66,8 @@ class Key < ApplicationRecord
 
   def render_params
     {
-      public_id: public_id
+      public_id: public_id,
+      first_team: first_team.capitalize
     }
   end
 end

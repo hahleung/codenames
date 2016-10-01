@@ -15,7 +15,7 @@ module Codenames
             doc.body Settings.body_attributes do
               Navbar.display(doc)
 
-              KeyHelper.display_public_id(doc, key_params[:public_id])
+              KeyHelper.display_board_params(doc, key_params)
 
               KeyHelper.display_key(doc, key)
 
@@ -29,13 +29,13 @@ module Codenames
         Nokogiri::HTML::Builder.new do |doc|
           doc.html do
             doc.head do
-              Settings.set_head(doc, title: 'Spy key')
+              Settings.set_head(doc, title: 'Board')
             end
 
             doc.body Settings.body_attributes do
               Navbar.display(doc)
 
-              KeyHelper.display_public_id(doc, key_params[:public_id])
+              KeyHelper.display_board_params(doc, key_params)
 
               KeyHelper.display_board(doc, key)
 

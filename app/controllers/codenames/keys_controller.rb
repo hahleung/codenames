@@ -12,6 +12,7 @@ module Codenames
 
     def show
       key = Key.find(id).render_key
+
       key_params = Key.find(id).render_params
 
       key_view = if tag == 'key'
