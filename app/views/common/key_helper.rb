@@ -50,11 +50,13 @@ module Codenames
 
       def self.generate_tile_board(doc, tile)
         color = tile_color(tile)
+        id = "tile" + tile[:position].join
 
         doc.div class: 'col-sm-3 col-md-3', style: 'height: 150px; width: 150px; display: block' do
-          doc.a class: 'thumbnail', style: "height: 150px; width: 150px; display: block", onclick: "reveal(this, '#{color}')", onmouseover: "over(this)", onmouseout: "not_over(this)" do
+          doc.a class: 'thumbnail', style: "height: 150px; width: 150px; display: block", onclick: "reveal(this, '#{color}')", onmouseover: "over(this, #{id})", onmouseout: "not_over(this, #{id})" do
             doc.div style: "margin-top: 60px; margin-bottom: 60px; height: 20px; text-align: -webkit-center; padding: initial; font-size: larger; color: black" do
               doc.text tile[:name]
+              doc.p tile[:french_translation], id: id, style: "display: none"
             end
           end
         end

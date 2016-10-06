@@ -21,7 +21,7 @@ class Key < ApplicationRecord
   end
 
   def self.sample_words
-    Word.all.pluck(:name).sample(25)
+    Word.all.sample(25)
   end
 
   def self.generate
@@ -33,8 +33,9 @@ class Key < ApplicationRecord
 
     tiles = composition.map do |word, color, position|
       Tile.create(
-        name: word,
+        name: word.name,
         color: color,
+        french_translation: word.french_translation,
         position: position
       )
     end.pluck(:id)
@@ -51,6 +52,7 @@ class Key < ApplicationRecord
       {
         "position": tile.position,
         "name": tile.name,
+        "french_translation": tile.french_translation,
         "color": tile.color
       }
     end

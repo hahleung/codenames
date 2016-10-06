@@ -2,10 +2,13 @@ function reveal(elmnt, color) {
     elmnt.style.backgroundColor = color
 };
 
-function over(elmnt) {
-    elmnt.style.fontSize = 'x-large'
+function over(elmnt, id) {
+    elmnt.style.fontSize = 'large';
+    id.setAttribute(
+            "style", "font-style: italic", "font-size: small");
 };
 
-function not_over(elmnt) {
-    elmnt.style.fontSize = 'large'
+function not_over(elmnt, id) {
+    elmnt.style.fontSize = 'small';
+    id.style.display = 'none';
 };

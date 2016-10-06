@@ -14,7 +14,7 @@ module Codenames
               doc.span class: "icon-bar"
             end
             doc.a class: "navbar-brand", href: "#" do
-              doc.h1 'CODENAMES', style: 'display: inline'
+              doc.h1 'NADECOMES', style: 'display: inline'
             end
           end
 
